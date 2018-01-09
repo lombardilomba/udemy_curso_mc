@@ -13,6 +13,7 @@ import com.udmc.app.model.Cidade;
 import com.udmc.app.model.Cliente;
 import com.udmc.app.model.Endereco;
 import com.udmc.app.model.Estado;
+import com.udmc.app.model.ItemPedido;
 import com.udmc.app.model.Pagamento;
 import com.udmc.app.model.PagamentoComBoleto;
 import com.udmc.app.model.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.udmc.app.repository.CidadeRepository;
 import com.udmc.app.repository.ClienteRepository;
 import com.udmc.app.repository.EnderecoRepository;
 import com.udmc.app.repository.EstadoRepository;
+import com.udmc.app.repository.ItemPedidoRepository;
 import com.udmc.app.repository.PagamentoRepository;
 import com.udmc.app.repository.PedidoRepository;
 import com.udmc.app.repository.ProdutoRepository;
@@ -55,6 +57,10 @@ public class UdemyCursoMcApplication implements CommandLineRunner {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(UdemyCursoMcApplication.class, args);
@@ -118,6 +124,19 @@ public class UdemyCursoMcApplication implements CommandLineRunner {
 		
 		pedidoRepository.save(Arrays.asList(ped1, ped2));
 		pagamentoRepository.save(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.0, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.0, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.0, 1, 800.0);
+		
+		ped1.getItems().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItems().addAll(Arrays.asList(ip3));
+		
+		p1.getItems().addAll(Arrays.asList(ip1));
+		p2.getItems().addAll(Arrays.asList(ip3));
+		p3.getItems().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.save(Arrays.asList(ip1, ip2, ip3));
 	}
 	
 }
