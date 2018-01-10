@@ -31,7 +31,6 @@ public class Cidade implements Serializable {
 	private String nome;
 
 	@ManyToOne
-	@JsonManagedReference
 	@JoinColumn(name="estado_id")
 	private Estado estado;
 
