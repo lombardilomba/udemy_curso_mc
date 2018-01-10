@@ -23,4 +23,9 @@ public class CategoriaService {
 		return categoria;
 	}
 	
+	public Categoria inserir(Categoria categoriaNew) {
+		categoriaNew.setId(null);
+		return dao.save(categoriaNew);
+	}
+	
 }
