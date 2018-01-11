@@ -70,6 +70,11 @@ public class UdemyCursoMcApplication implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Cat 3");
+		Categoria cat4 = new Categoria(null, "Cat 4");
+		Categoria cat5 = new Categoria(null, "Cat 5");
+		Categoria cat6 = new Categoria(null, "Cat 6");
+		Categoria cat7 = new Categoria(null, "Cat 7");
 		
 		Produto p1 = new Produto(null, "Computador", 2000.0);
 		Produto p2 = new Produto(null, "Impressora", 800.0);
@@ -82,8 +87,9 @@ public class UdemyCursoMcApplication implements CommandLineRunner {
 		p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
 		
-		
 		categoriaRepository.save(Arrays.asList(cat1, cat2));
+		categoriaRepository.save(Arrays.asList(cat3, cat4, cat5, cat6, cat7));
+		
 		produtoRepository.save(Arrays.asList(p1, p2, p3));
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
