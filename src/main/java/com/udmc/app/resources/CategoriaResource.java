@@ -26,6 +26,12 @@ public class CategoriaResource {
 		return ResponseEntity.ok(service.find(id));
 	}
 	
+	/**
+	 * Cria categoria e retorna a URI da categoria que foi inserida
+	 * <b>@ResquestBody</b> transforma Json em Java
+	 * @param categoria
+	 * @return
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> inserir(@RequestBody Categoria categoria) {
 		categoria = service.inserir(categoria);
@@ -35,6 +41,19 @@ public class CategoriaResource {
 							.buildAndExpand(categoria.getId())
 							.toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Long id) {
+		categoria.setId(id);
+		categoria = service.update(categoria);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		service.delete(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 }

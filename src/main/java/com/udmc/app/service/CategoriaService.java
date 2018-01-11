@@ -1,6 +1,7 @@
 package com.udmc.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.udmc.app.model.Categoria;
@@ -26,6 +27,20 @@ public class CategoriaService {
 	public Categoria inserir(Categoria categoriaNew) {
 		categoriaNew.setId(null);
 		return dao.save(categoriaNew);
+	}
+
+	public Categoria update(Categoria categoria) {
+		find(categoria.getId());
+		return dao.save(categoria);
+	}
+
+	public void delete(Long id) {
+		find(id);
+		try {
+			dao.delete(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Não é possível incluir uma categoria com Produto(s)");
+		}
 	}
 	
 }
