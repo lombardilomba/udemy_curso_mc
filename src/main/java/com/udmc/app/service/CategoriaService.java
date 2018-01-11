@@ -1,5 +1,7 @@
 package com.udmc.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,10 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível incluir uma categoria com Produto(s)");
 		}
+	}
+
+	public List<Categoria> listarTodos() {
+		return dao.findAll();
 	}
 	
 }
