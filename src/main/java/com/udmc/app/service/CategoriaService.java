@@ -45,7 +45,7 @@ public class CategoriaService {
 		try {
 			dao.delete(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityViolationException("Não é possível incluir uma categoria com Produto(s)");
+			throw new DataIntegrityViolationException("Não é possível excluir uma categoria com Produto(s)");
 		}
 	}
 
