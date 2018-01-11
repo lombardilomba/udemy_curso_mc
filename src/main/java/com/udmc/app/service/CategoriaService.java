@@ -35,9 +35,14 @@ public class CategoriaService {
 		return dao.save(categoriaNew);
 	}
 
-	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
+	public Categoria update(Categoria obj) {
+		Categoria categoria = find(obj.getId());
+		updateDataObj(categoria, obj);
 		return dao.save(categoria);
+	}
+
+	private void updateDataObj(Categoria categoria, Categoria obj) {
+		categoria.setNome(obj.getNome());
 	}
 
 	public void delete(Long id) {
