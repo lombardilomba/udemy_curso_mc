@@ -6,6 +6,9 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.udmc.app.service.validations.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 6833540042401413758L;
@@ -18,20 +21,26 @@ public class ClienteNewDTO implements Serializable {
 	@Email(message="e-mail inválido")
 	private String email;
 	
+	
 	private String cpfOuCnpj;
 	
 	private Integer tipo;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String logradouro;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String numero;
 	
 	private String complemento;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String bairro;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone;
 	
 	private String telefone2;
