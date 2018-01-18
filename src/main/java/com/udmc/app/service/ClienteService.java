@@ -32,21 +32,21 @@ public class ClienteService {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	public Cliente find(Long clienteId) {
-		Cliente cliente = dao.findOne(clienteId);
+	public Cliente find(Long objId) {
+		Cliente obj = dao.findOne(objId);
 		
-		if(cliente == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado id: " + clienteId + ", tipo " + Cliente.class.getName());
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado id: " + objId + ", tipo " + Cliente.class.getName());
 		}
 		
-		return cliente;
+		return obj;
 	}
 	
-	public Cliente inserir(Cliente clienteNew) {
-		clienteNew.setId(null);
-		clienteNew = dao.save(clienteNew);
-		enderecoRepository.save(clienteNew.getEnderecos());
-		return clienteNew;
+	public Cliente inserir(Cliente objNew) {
+		objNew.setId(null);
+		objNew = dao.save(objNew);
+		enderecoRepository.save(objNew.getEnderecos());
+		return objNew;
 	}
 	
 	public Cliente update(Cliente obj) {

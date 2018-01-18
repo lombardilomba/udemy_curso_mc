@@ -2,43 +2,43 @@ package com.udmc.app.service.validations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerMapping;
 
-import com.udmc.app.dto.ClienteNewDTO;
+import com.udmc.app.dto.ClienteDTO;
 import com.udmc.app.model.Cliente;
-import com.udmc.app.model.enums.TipoCliente;
 import com.udmc.app.repository.ClienteRepository;
 import com.udmc.app.resources.exception.FieldMessage;
-import com.udmc.app.service.validations.utils.BR;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
 
 	@Autowired
 	private ClienteRepository repository;
 	
+	@Autowired
+	private HttpServletRequest request;
+	
 	@Override
-	public void initialize(ClienteInsert arg0) {
+	public void initialize(ClienteUpdate arg0) {
 	}
 
 	@Override
-	public boolean isValid(ClienteNewDTO dto, ConstraintValidatorContext context) {
+	@SuppressWarnings("unchecked")
+	public boolean isValid(ClienteDTO dto, ConstraintValidatorContext context) {
+		
+		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		Long uriId = Long.parseLong(map.get("id"));
 		
 		List<FieldMessage> list = new ArrayList<FieldMessage>();
 		
-		if(dto.getTipo().equals(TipoCliente.PESSOAFISICA.getCodigo()) && BR.isValidCPF(dto.getCpfOuCnpj()) == false) {
-			list.add(new FieldMessage("cpfOuCnpj"," CPF inválido"));
-		}
-		
-		if(dto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCodigo()) && BR.isValidCPF(dto.getCpfOuCnpj()) == false) {
-			list.add(new FieldMessage("cpfOuCnpj"," CNPJ inválido"));
-		}
-		
 		Cliente aux = repository.findByEmail(dto.getEmail());
-		if (aux != null) {
+		if ( aux != null && aux.getId().equals(uriId) == false) {
 			list.add(new FieldMessage("email"," Email já existe"));
 		}
 		

@@ -13,14 +13,14 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository dao;
 	
-	public Pedido find(Long categoriaId) {
-		Pedido categoria = dao.findOne(categoriaId);
+	public Pedido find(Long objId) {
+		Pedido obj = dao.findOne(objId);
 		
-		if(categoria == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado id: " + categoriaId + ", tipo " + Pedido.class.getName());
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado id: " + objId + ", tipo " + Pedido.class.getName());
 		}
 		
-		return categoria;
+		return obj;
 	}
 	
 }

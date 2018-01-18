@@ -20,14 +20,14 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository dao;
 	
-	public Categoria find(Long categoriaId) {
-		Categoria categoria = dao.findOne(categoriaId);
+	public Categoria find(Long objId) {
+		Categoria obj = dao.findOne(objId);
 		
-		if(categoria == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado id: " + categoriaId + ", tipo " + Categoria.class.getName());
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado id: " + objId + ", tipo " + Categoria.class.getName());
 		}
 		
-		return categoria;
+		return obj;
 	}
 	
 	public Categoria inserir(Categoria categoriaNew) {
