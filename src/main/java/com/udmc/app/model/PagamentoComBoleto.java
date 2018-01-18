@@ -5,9 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.udmc.app.model.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento implements Serializable {
 
 	private static final long serialVersionUID = -3989655916013487248L;
