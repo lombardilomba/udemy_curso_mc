@@ -24,6 +24,10 @@ public class ItemPedido implements Serializable {
 		this.preco = preco;
 	}
 	
+	public Double getSubTotal() {
+		return (preco - desconto) * quantidade;
+	}
+	
 	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
